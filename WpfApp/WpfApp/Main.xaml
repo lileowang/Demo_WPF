@@ -1,0 +1,47 @@
+﻿<Window x:Class="WpfApp.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        xmlns:demo="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="Main" Height="300" Width="300">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="FontSize" Value="50"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="myStyle">
+            <Setter Property="ListBoxItem.Background" Value="YellowGreen"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <ListBox Name="lbxColors">
+            <ListBoxItem Content="red"/>
+            <ListBoxItem Content="green"/>
+            <ListBox.ItemContainerStyleSelector>
+                <demo:RowStyle AlternateStyle="{StaticResource ResourceKey=myStyle}"/>
+            </ListBox.ItemContainerStyleSelector>
+        </ListBox>
+
+        <TextBox
+            Background="{Binding ElementName=lbxColors, Path=SelectedItem.Content}"
+            Text="{Binding ElementName=lbxColors, Path=SelectedItem.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            >
+            
+        </TextBox>
+
+        <Button
+            Name="btnDemo"
+            Content="demo"
+            Click="btnDemo_Click"
+            >
+            
+        </Button>
+    </StackPanel>
+</Window>
